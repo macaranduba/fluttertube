@@ -1,3 +1,9 @@
+import 'dart:convert';
+
+import 'package:http/http.dart' as http;
+
+import 'models/video.dart';
+
 const API_KEY = 'insert coin here';
 /*
   testar no navegador

@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertube/screens/home.dart';
 
+import 'api.dart';
+
 void main() {
+  Api().search('eletro');
+
   runApp(MyApp());
 }
 

@@ -40,13 +40,10 @@ class DataSearch extends SearchDelegate<String> {
   // show suggestions while user is typing
   @override
   Widget buildSuggestions(BuildContext context) {
-    print('buildSuggestions query=$query');
-
     if(query.isEmpty) { // we always must return a widget, even when there is nothing to show
       return Container();
     } else {
       return FutureBuilder(
-
         future: suggestions(query),
         builder: (context, snapshot) {
           print(snapshot);
@@ -60,7 +57,7 @@ class DataSearch extends SearchDelegate<String> {
                   title: Text(snapshot.data[index]),
                   leading: Icon(Icons.play_arrow),
                   onTap: () {
-                    print('${snapshot.data[index]} clicado!');
+                    print('[DataSearch.buildSuggestions.ListTitle.ontap] ${snapshot.data[index]} clicado!');
                     close(context, snapshot.data[index]);
                   },
                 );
@@ -80,7 +77,7 @@ class DataSearch extends SearchDelegate<String> {
             'http://suggestqueries.google.com/complete/search?hl=en&ds=yt&client=youtube&hjson=t&cp=1&q=$search&format=5&alt=json'
         )
     );
-    print('Got ${response.body}');
+    print('[DataSearch.suggestions] Got ${response.body}');
 
     if(response.statusCode == 200) {
       return json.decode(response.body)[1].map(

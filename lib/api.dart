@@ -17,14 +17,14 @@ const API_KEY = 'insert coin here';
 
 class Api {
 
-  search(String searchText) async {
+  Future<List<Video>> search(String searchText) async {
     http.Response response = await http.get(
       Uri.parse(
         'https://www.googleapis.com/youtube/v3/search?part=snippet&q=$searchText&type=video&key=$API_KEY&maxResults=10'
       )
     );
 
-    decode(response);
+    return decode(response);
   }
 
   List<Video> decode(http.Response response) {
@@ -34,7 +34,7 @@ class Api {
         (item) => Video.fromJson(item)
       ).toList();
 
-      print(videosList);
+      //print(videosList);
 
       return videosList;
     } else {

@@ -4,10 +4,8 @@ import 'package:fluttertube/blocs/favorite_bloc.dart';
 import 'package:fluttertube/blocs/videos_bloc.dart';
 import 'package:fluttertube/screens/home.dart';
 
-import 'api.dart';
-
 void main() {
-  Api().search('eletro');
+  //Api().search('eletro'); initial API test
 
   runApp(MyApp());
 }

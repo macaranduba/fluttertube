@@ -18,6 +18,7 @@ class FavoriteBloc extends BlocBase {
 
   FavoriteBloc() {
     SharedPreferences.getInstance().then((preferences) {
+      // preferences.clear(); reset local preferences
       if(preferences.getKeys().contains(SHARED_PREFERENCES_KEY)) {
         _favoritesMap = json.decode(preferences.getString(SHARED_PREFERENCES_KEY)).map(
           (k, v) {

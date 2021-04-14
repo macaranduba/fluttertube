@@ -6,9 +6,6 @@ import 'models/video.dart';
 
 const API_KEY = 'insert coin here';
 /*
-  testar no navegador
-  https://www.googleapis.com/youtube/v3/search?part=snippet&q=eletro&type=video&key=AIzaSyAw7lSc6xJ85Welz0x74xXgQ0Cc8v2goOA&maxResults=10
-
   'https://www.googleapis.com/youtube/v3/search?part=snippet&q=$search&type=video&key=$API_KEY&maxResults=10'
   'https://www.googleapis.com/youtube/v3/search?part=snippet&q=$_search&type=video&key=$API_KEY&maxResults=10&pageToken=$_nextToken'
   'http://suggestqueries.google.com/complete/search?hl=en&ds=yt&client=youtube&hjson=t&cp=1&q=$search&format=5&alt=json'

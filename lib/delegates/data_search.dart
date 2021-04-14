@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 class DataSearch extends SearchDelegate<String> {
 
   @override
-  String get searchFieldLabel => 'Procurar';
+  String get searchFieldLabel => 'Procurar...';
 
   @override
   List<Widget> buildActions(BuildContext context) {

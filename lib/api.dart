@@ -17,7 +17,15 @@ const API_KEY = 'insert coin here';
 
 class Api {
 
+  String _searchText;
+  String _nextToken;
+
   Future<List<Video>> search(String searchText) async {
+
+    _searchText = searchText;
+
+    //print('Api.search($searchText)');
+    //print('Api.search url = https://www.googleapis.com/youtube/v3/search?part=snippet&q=$searchText&type=video&key=$API_KEY&maxResults=10');
     http.Response response = await http.get(
       Uri.parse(
         'https://www.googleapis.com/youtube/v3/search?part=snippet&q=$searchText&type=video&key=$API_KEY&maxResults=10'
@@ -30,6 +38,9 @@ class Api {
   List<Video> decode(http.Response response) {
     if(response.statusCode == 200) { // data returned OK
       var decoded = json.decode(response.body);
+
+      _nextToken = decoded['nextPageToken'];
+
       List<Video> videosList = decoded['items'].map<Video>(
         (item) => Video.fromJson(item)
       ).toList();
@@ -38,7 +49,22 @@ class Api {
 
       return videosList;
     } else {
+      //print('response.statusCode = ${response.statusCode}');
+      //print('response.body = ${response.body}');
       throw Exception('Failed to load videos!');
     }
   }
+
+  Future<List<Video>> nextPage() async {
+    //print('Api.nextPage url = https://www.googleapis.com/youtube/v3/search?part=snippet&q=$_searchText&type=video&key=$API_KEY&maxResults=10&pageToken=$_nextToken');
+
+    http.Response response = await http.get(
+      Uri.parse(
+        'https://www.googleapis.com/youtube/v3/search?part=snippet&q=$_searchText&type=video&key=$API_KEY&maxResults=10&pageToken=$_nextToken'
+      )
+    );
+
+    return decode(response);
+  }
+
 }

@@ -23,9 +23,16 @@ class VideosBloc extends BlocBase {
   }
 
   void _search(String searchText) async {
-    print('[VideosBloc._search] Procurando por $searchText... encontrei:');
-    _videosList = await api.search(searchText);
-    print('[VideosBloc._search] $_videosList');
+    //print('[VideosBloc._search] Procurando por $searchText... encontrei:');
+
+    if(searchText != null) { // search for something
+      _videosController.sink.add([]); // reset the ListView piping an empty video list
+      _videosList = await api.search(searchText);
+    } else {
+      _videosList += await api.nextPage(); // dart allows to add 2 different lists!!
+    }
+    //print('[VideosBloc._search] $_videosList');
+
     _videosController.sink.add(_videosList);
   }
 

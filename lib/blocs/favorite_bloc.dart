@@ -13,8 +13,8 @@ class FavoriteBloc extends BlocBase {
   Map<String, Video> _favoritesMap = {};
 
 
-  final StreamController<Map<String, Video>> _favController = BehaviorSubject<Map<String, Video>>();
-  Stream<Map<String, Video>> get outFav => _favController.stream.asBroadcastStream();
+  final BehaviorSubject<Map<String, Video>> _favController = BehaviorSubject<Map<String, Video>>.seeded({});
+  Stream<Map<String, Video>> get outFav => _favController.stream;
 
   FavoriteBloc() {
     SharedPreferences.getInstance().then((preferences) {
